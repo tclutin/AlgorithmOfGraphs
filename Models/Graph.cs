@@ -19,9 +19,9 @@ namespace AlgorithmOfGraphs.Models
             Vertexes.Add(vertex);
         }
 
-        public void AddEdge(Vertex from, Vertex to)
+        public void AddEdge(Vertex from, Vertex to, int вес)
         {
-            var edge = new Edge(from, to);
+            var edge = new Edge(from, to, вес);
             Edges.Add(edge);
         }
 
@@ -38,6 +38,27 @@ namespace AlgorithmOfGraphs.Models
             }
 
             return matrix;
+        }
+
+        public void PrintMatrix()
+        {
+            Console.Write("   ");
+            foreach (var vertex in Vertexes)
+            {
+                Console.Write($"{vertex} ");
+            }
+            Console.WriteLine();
+
+            var matrix = GetMatrix();
+            for (int i = 0; i < VertexCount; i++)
+            {
+                Console.Write($"{Vertexes[i]}  ");
+                for (int j = 0; j < VertexCount; j++)
+                {
+                    Console.Write($"{matrix[i, j]} ");
+                }
+                Console.WriteLine();
+            }
         }
     }
 }

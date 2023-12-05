@@ -1,4 +1,5 @@
 ﻿using AlgorithmOfGraphs.Algorithms;
+using AlgorithmOfGraphs.Data;
 using AlgorithmOfGraphs.Models;
 
 namespace AlgorithmOfGraphs
@@ -25,32 +26,33 @@ namespace AlgorithmOfGraphs
             graph.AddVertex(v6);
             graph.AddVertex(v7);
 
-            graph.AddEdge(v1, v2);
-            graph.AddEdge(v1, v3);
-            graph.AddEdge(v3, v4);
-            graph.AddEdge(v2, v5);
-            graph.AddEdge(v2, v6);
-            graph.AddEdge(v6, v5);
-            graph.AddEdge(v5, v6);
+            //graph.AddEdge(v1, v2);
+            //graph.AddEdge(v1, v3);
+            //graph.AddEdge(v3, v4);
+            //graph.AddEdge(v2, v5);
+            //graph.AddEdge(v2, v6);
+            //graph.AddEdge(v6, v5);
+            //graph.AddEdge(v5, v6);
 
-            var matrix = graph.GetMatrix();
+            graph.AddEdge(v1, v2, 1);
+            graph.AddEdge(v1, v3, 1);
+            graph.AddEdge(v3, v4, 1);
+            graph.AddEdge(v3, v6, 1);
+            graph.AddEdge(v3, v5, 2);
+            graph.AddEdge(v2, v3, 2);
+            graph.AddEdge(v2, v4, 3);
 
-            Console.Write(0);
-            for (int i = 0; i < graph.VertexCount; i++)
-            {
-                Console.Write($" {i + 1} ");
-            }
-            Console.WriteLine();
+            graph.AddEdge(v4, v5, 1);
+            graph.AddEdge(v5, v6, 3);
+            graph.AddEdge(v5, v7, 1);
+            graph.AddEdge(v6, v7, 4);
 
-            for (int i = 0; i < graph.VertexCount; i++)
-            {
-                Console.Write(i + 1);
-                for (int j = 0; j < graph.EdgeCount; j++)
-                {
-                    Console.Write(" " + matrix[i, j] + " ");
-                }
-                Console.WriteLine();
-            }
+
+            //var matrix = graph.GetMatrix();
+            var граф = new DataLoader().Get("test.csv");
+            граф.PrintMatrix();
+
+            ///////////////////////////////////////////////////////////////////
 
             List<string> x = new BfsAlgorithm().Bfs(graph, v1);
             foreach (var item in x)
@@ -61,6 +63,14 @@ namespace AlgorithmOfGraphs
             Console.WriteLine("№---");
             List<string> y = new DfsAlgorithm().Dfs(graph, v1);
             foreach (var item in y)
+            {
+                Console.WriteLine(item);
+            }
+
+
+            Console.WriteLine("№---");
+            List<string> r = new DijkstraAlgorithm().FindShortestPath(graph, v1, v5);
+            foreach (var item in r)
             {
                 Console.WriteLine(item);
             }

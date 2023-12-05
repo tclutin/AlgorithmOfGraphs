@@ -29,6 +29,7 @@ namespace AlgorithmOfGraphs.Algorithms
             while (queue.Count > 0)
             {
                 Vertex currentVertex = queue.Dequeue();
+                //_steps.Add($"Visit vertex {currentVertex}");
 
                 foreach (Edge edge in graph.Edges)
                 {
