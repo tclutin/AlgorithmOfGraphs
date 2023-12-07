@@ -1,6 +1,6 @@
 ﻿using AlgorithmOfGraphs.Algorithms;
-using AlgorithmOfGraphs.Data;
 using AlgorithmOfGraphs.Models;
+using Microsoft.VisualBasic;
 
 namespace AlgorithmOfGraphs
 {
@@ -8,6 +8,18 @@ namespace AlgorithmOfGraphs
     {
         public static void Main(string[] args)
         {
+            int[][] matrix = new int[][]
+            {
+            new int[] { 1, 1, 1, 1, 1, 0, 0 },
+            new int[] { 1, 1, 0, 1, 1, 0, 0 },
+            new int[] { 1, 0, 1, 0, 0, 1, 1 },
+            new int[] { 1, 1, 0, 1, 1, 0, 0 },
+            new int[] { 1, 1, 0, 1, 1, 0, 0 },
+            new int[] { 0, 0, 1, 0, 0, 1, 1 },
+            new int[] { 0, 0, 1, 0, 0, 1, 1 }
+            };
+            
+
             var graph = new Graph();
 
             var v1 = new Vertex(1);
@@ -15,42 +27,26 @@ namespace AlgorithmOfGraphs
             var v3 = new Vertex(3);
             var v4 = new Vertex(4);
             var v5 = new Vertex(5);
-            var v6 = new Vertex(6);
-            var v7 = new Vertex(7);
 
             graph.AddVertex(v1);
             graph.AddVertex(v2);
             graph.AddVertex(v3);
             graph.AddVertex(v4);
             graph.AddVertex(v5);
-            graph.AddVertex(v6);
-            graph.AddVertex(v7);
-
-            //graph.AddEdge(v1, v2);
-            //graph.AddEdge(v1, v3);
-            //graph.AddEdge(v3, v4);
-            //graph.AddEdge(v2, v5);
-            //graph.AddEdge(v2, v6);
-            //graph.AddEdge(v6, v5);
-            //graph.AddEdge(v5, v6);
 
             graph.AddEdge(v1, v2, 1);
-            graph.AddEdge(v1, v3, 1);
-            graph.AddEdge(v3, v4, 1);
-            graph.AddEdge(v3, v6, 1);
-            graph.AddEdge(v3, v5, 2);
-            graph.AddEdge(v2, v3, 2);
-            graph.AddEdge(v2, v4, 3);
+            graph.AddEdge(v1, v3, 3);
+            graph.AddEdge(v1, v4, 6);
+            
+            graph.AddEdge(v3, v5, 8);
+            graph.AddEdge(v4, v5, 4);
+            graph.AddEdge(v2, v5, 12);
+            graph.AddEdge(v2, v4, 4);
 
-            graph.AddEdge(v4, v5, 1);
-            graph.AddEdge(v5, v6, 3);
-            graph.AddEdge(v5, v7, 1);
-            graph.AddEdge(v6, v7, 4);
 
 
             //var matrix = graph.GetMatrix();
-            var граф = new DataLoader().Get("test.csv");
-            граф.PrintMatrix();
+            graph.PrintMatrix();
 
             ///////////////////////////////////////////////////////////////////
 
@@ -74,6 +70,8 @@ namespace AlgorithmOfGraphs
             {
                 Console.WriteLine(item);
             }
+
+ 
         }
     }
 }

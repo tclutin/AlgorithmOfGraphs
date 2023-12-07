@@ -12,19 +12,8 @@ namespace AlgorithmOfGraphs.Algorithms
     {
         private Dictionary<Vertex, int> _distances;
         private Dictionary<Vertex, Vertex> _previous;
-        private HashSet<Vertex> _visited;
+        private HashSet<Vertex> _visited = new HashSet<Vertex>();
         private List<string> _steps = new List<string>();
-
-        public List<string> FindShortestPath1(Graph graph, Vertex startVertex, Vertex endVertex)
-        {
-            if (graph == null || startVertex == null || endVertex == null)
-            {
-                Console.WriteLine("Invalid graph or vertices.");
-                return null;
-            }
-            return null;
-
-        }
 
         public List<string> FindShortestPath(Graph graph, Vertex startVertex, Vertex endVertex)
         {
@@ -34,9 +23,15 @@ namespace AlgorithmOfGraphs.Algorithms
                 return null;
             }
 
+
+            if (graph.Edges.Any(e => e.Weight < 0))
+            {
+                Console.WriteLine("Graph contains negative weights. Dijkstra's algorithm cannot handle negative weights.");
+                return null;
+            }
+
             Initialize(graph, startVertex);
-            _visited = new HashSet<Vertex>();
-            _steps = new List<string>();
+            
 
             while (_visited.Count < graph.VertexCount)
             {
@@ -64,6 +59,7 @@ namespace AlgorithmOfGraphs.Algorithms
         {
             _distances = new Dictionary<Vertex, int>();
             _previous = new Dictionary<Vertex, Vertex>();
+
 
             foreach (Vertex vertex in graph.Vertexes)
             {
