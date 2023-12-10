@@ -8,18 +8,7 @@ namespace AlgorithmOfGraphs
     {
         public static void Main(string[] args)
         {
-            int[][] matrix = new int[][]
-            {
-            new int[] { 1, 1, 1, 1, 1, 0, 0 },
-            new int[] { 1, 1, 0, 1, 1, 0, 0 },
-            new int[] { 1, 0, 1, 0, 0, 1, 1 },
-            new int[] { 1, 1, 0, 1, 1, 0, 0 },
-            new int[] { 1, 1, 0, 1, 1, 0, 0 },
-            new int[] { 0, 0, 1, 0, 0, 1, 1 },
-            new int[] { 0, 0, 1, 0, 0, 1, 1 }
-            };
-            
-
+         
             var graph = new Graph();
 
             var v1 = new Vertex(1);
@@ -34,14 +23,26 @@ namespace AlgorithmOfGraphs
             graph.AddVertex(v4);
             graph.AddVertex(v5);
 
-            graph.AddEdge(v1, v2, 1);
-            graph.AddEdge(v1, v3, 3);
-            graph.AddEdge(v1, v4, 6);
-            
-            graph.AddEdge(v3, v5, 8);
-            graph.AddEdge(v4, v5, 4);
-            graph.AddEdge(v2, v5, 12);
-            graph.AddEdge(v2, v4, 4);
+            graph.AddEdge(v1, v2, 30);
+            graph.AddEdge(v1, v4, 20);
+            graph.AddEdge(v1, v3, 40);
+
+            graph.AddEdge(v2, v3, 50);
+            graph.AddEdge(v2, v5, 40);
+
+            graph.AddEdge(v3, v4, 20);
+            graph.AddEdge(v3, v5, 30);
+
+            graph.AddEdge(v4, v5, 30);
+
+            //graph.AddEdge(v1, v2, 1);
+            //graph.AddEdge(v1, v3, 3);
+            //graph.AddEdge(v1, v4, 6);
+
+            //graph.AddEdge(v3, v5, 8);
+            //graph.AddEdge(v4, v5, 4);
+            //graph.AddEdge(v2, v5, 12);
+            //graph.AddEdge(v2, v4, 4);
 
 
 
@@ -71,7 +72,14 @@ namespace AlgorithmOfGraphs
                 Console.WriteLine(item);
             }
 
- 
+
+            Console.WriteLine("№---");
+            (int max, List<string> steps) = new FordFalkersonAlgorithm().FordFulkerson(graph, v1, v5);
+            foreach (var item in steps)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine(max);
         }
     }
 }

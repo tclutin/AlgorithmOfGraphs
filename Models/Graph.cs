@@ -14,16 +14,16 @@ namespace AlgorithmOfGraphs.Models
         public int VertexCount => Vertexes.Count;
         public int EdgeCount => Edges.Count;
 
-        public void AddVertex(Vertex vertex)
-        {
-            Vertexes.Add(vertex);
-        }
+            public void AddVertex(Vertex vertex)
+            {
+                Vertexes.Add(vertex);
+            }
 
-        public void AddEdge(Vertex from, Vertex to, int вес)
-        {
-            var edge = new Edge(from, to, вес);
-            Edges.Add(edge);
-        }
+            public void AddEdge(Vertex from, Vertex to, int вес)
+            {
+                var edge = new Edge(from, to, вес);
+                Edges.Add(edge);
+            }
 
         public int[,] GetMatrix()
         {
