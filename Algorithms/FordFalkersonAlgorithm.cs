@@ -55,7 +55,7 @@ namespace AlgorithmOfGraphs.Algorithms
         //    return (maxFlow, _steps);
         //}
 
-        public (int, List<string>) FordFulkerson1(Graph graph, Vertex start, Vertex end)
+        public (int, List<string>) FordFulkerson(Graph graph, Vertex start, Vertex end)
         {
             if (graph == null || start == null || end == null)
             {
@@ -86,8 +86,7 @@ namespace AlgorithmOfGraphs.Algorithms
                     edge.Weight -= minCapacity;
                     _steps.Add($"Уменьшаем остаточную емкость на ребре {edge.From} -> {edge.To} на {minCapacity}");
                 }
-                maxFlow += minCapacity;
-
+                _steps.Add($"Максимальный поток увеличивается: {maxFlow} + {minCapacity} = {maxFlow += minCapacity}");
             }
 
             return (maxFlow, _steps);

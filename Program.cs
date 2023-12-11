@@ -24,7 +24,7 @@ namespace AlgorithmOfGraphs
             graph.AddVertex(v5);
 
 
-            
+
             //graph.AddEdge(v1, v2, 30);
             //graph.AddEdge(v1, v4, 20);
             //graph.AddEdge(v1, v3, 40);
