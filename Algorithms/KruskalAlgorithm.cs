@@ -13,13 +13,10 @@ namespace AlgorithmOfGraphs.Algorithms
 
         public List<string> Kruskal(Graph graph)
         {
-            // Sort edges based on their weights in ascending order
             var sortedEdges = graph.Edges.OrderBy(e => e.Weight).ToList();
 
-            // Initialize disjoint set data structure for vertices
             var disjointSet = new DisjointSet(graph.VertexCount);
 
-            // Resulting list of edges in the minimum spanning tree
             var resultEdges = new List<Edge>();
 
             foreach (var edge in sortedEdges)
@@ -27,16 +24,13 @@ namespace AlgorithmOfGraphs.Algorithms
                 var fromSet = disjointSet.Find(edge.From.Number - 1);
                 var toSet = disjointSet.Find(edge.To.Number - 1);
 
-                // Check if including this edge forms a cycle or not
                 if (fromSet != toSet)
                 {
-                    // Include the edge in the result and union the sets
                     resultEdges.Add(edge);
                     disjointSet.Union(fromSet, toSet);
                 }
             }
 
-            // Create a list of strings representing the steps (optional)
             CreateStepsList(resultEdges);
 
             return _steps;
@@ -44,7 +38,6 @@ namespace AlgorithmOfGraphs.Algorithms
 
         private void CreateStepsList(List<Edge> resultEdges)
         {
-            // Optional: Create a list of strings representing the steps
             _steps.Add("Kruskal's Algorithm Steps:");
 
             foreach (var edge in resultEdges)
@@ -54,7 +47,6 @@ namespace AlgorithmOfGraphs.Algorithms
         }
     }
 
-    // Disjoint set data structure
     public class DisjointSet
     {
         private int[] parent;
