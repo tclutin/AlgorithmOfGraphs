@@ -23,26 +23,28 @@ namespace AlgorithmOfGraphs
             graph.AddVertex(v4);
             graph.AddVertex(v5);
 
-            graph.AddEdge(v1, v2, 30);
-            graph.AddEdge(v1, v4, 20);
-            graph.AddEdge(v1, v3, 40);
 
-            graph.AddEdge(v2, v3, 50);
-            graph.AddEdge(v2, v5, 40);
+            
+            //graph.AddEdge(v1, v2, 30);
+            //graph.AddEdge(v1, v4, 20);
+            //graph.AddEdge(v1, v3, 40);
 
-            graph.AddEdge(v3, v4, 20);
-            graph.AddEdge(v3, v5, 30);
+            //graph.AddEdge(v2, v3, 50);
+            //graph.AddEdge(v2, v5, 40);
 
-            graph.AddEdge(v4, v5, 30);
+            //graph.AddEdge(v3, v4, 20);
+            //graph.AddEdge(v3, v5, 30);
 
-            //graph.AddEdge(v1, v2, 1);
-            //graph.AddEdge(v1, v3, 3);
-            //graph.AddEdge(v1, v4, 6);
+            //graph.AddEdge(v4, v5, 30);
 
-            //graph.AddEdge(v3, v5, 8);
-            //graph.AddEdge(v4, v5, 4);
-            //graph.AddEdge(v2, v5, 12);
-            //graph.AddEdge(v2, v4, 4);
+            graph.AddEdge(v1, v2, 1);
+            graph.AddEdge(v1, v3, 3);
+            graph.AddEdge(v1, v4, 6);
+
+            graph.AddEdge(v3, v5, 8);
+            graph.AddEdge(v4, v5, 4);
+            graph.AddEdge(v2, v5, 12);
+            graph.AddEdge(v2, v4, 4);
 
 
 

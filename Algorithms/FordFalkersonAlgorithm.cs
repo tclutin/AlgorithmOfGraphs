@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,9 +12,50 @@ namespace AlgorithmOfGraphs.Algorithms
     public class FordFalkersonAlgorithm
     {
         private HashSet<Vertex> visited = new HashSet<Vertex>();
-        private List<string> _steps = new List<string>();
 
-        public (int, List<string>) FordFulkerson(Graph graph, Vertex start, Vertex end)
+     
+        private List<string> _steps = new List<string>();
+        
+        //public (int, List<string>) FordFulkerson(Graph graph, Vertex start, Vertex end)
+        //{
+        //    if (graph == null || start == null || end == null)
+        //    {
+        //        Console.WriteLine("Invalid graph, start, or end vertex.");
+        //        return (0, null);
+        //    }
+
+        //    _steps.Add("Инициализируем граф остаточного потока.");
+        //    Graph residualGraph = InitializeGraph(graph);
+
+
+        //    int maxFlow = 0;
+
+        //    while (Bfs1(residualGraph, start, end))
+        //    {
+
+        //        foreach (Edge edge in path)
+        //        {
+        //            Console.WriteLine($"{edge.From} -> {edge.To}");
+        //        }
+
+        //        _steps.Add("Начинаем поиск минимального потока у найденного пути.");
+        //        int minCapacity = GetMinCapacity(path);
+        //        _steps.Add($"Минимальный поток определён: {minCapacity}");
+
+        //        foreach (Edge edge in path)
+        //        {
+                    
+        //            edge.Weight -= minCapacity;
+        //            //_steps.Add($"Уменьшаем остаточную емкость на ребре {edge.From} -> {edge.To} на {minCapacity}");
+        //        }
+        //        maxFlow += minCapacity;
+        //        path.Clear();
+        //    }
+
+        //    return (maxFlow, _steps);
+        //}
+
+        public (int, List<string>) FordFulkerson1(Graph graph, Vertex start, Vertex end)
         {
             if (graph == null || start == null || end == null)
             {
@@ -21,35 +63,46 @@ namespace AlgorithmOfGraphs.Algorithms
                 return (0, null);
             }
 
+            _steps.Add("Инициализируем граф остаточного потока.");
             Graph residualGraph = InitializeGraph(graph);
 
             int maxFlow = 0;
 
-            while (Bfs(residualGraph, start, end, out List<Edge> path))
+            while (true)
             {
+                List<Edge> path = Bfs(residualGraph, start, end);
+                if (path.Count == 0)
+                {
+                    break;
+                }
+
+                _steps.Add("Начинаем поиск минимального потока у найденного пути.");
                 int minCapacity = GetMinCapacity(path);
+                _steps.Add($"Минимальный поток определён: {minCapacity}");
 
                 foreach (Edge edge in path)
                 {
-                    edge.Weight -= minCapacity;
-                    _steps.Add($"Decrease residual capacity on edge {edge.From} -> {edge.To} by {minCapacity}");
-                }
 
+                    edge.Weight -= minCapacity;
+                    _steps.Add($"Уменьшаем остаточную емкость на ребре {edge.From} -> {edge.To} на {minCapacity}");
+                }
                 maxFlow += minCapacity;
+
             }
 
             return (maxFlow, _steps);
         }
 
-        private bool Bfs(Graph graph, Vertex startVertex, Vertex endVertex, out List<Edge> path)
+        private List<Edge> Bfs(Graph graph, Vertex startVertex, Vertex endVertex)
         {
-            path = new List<Edge>();
             visited.Clear();
             Queue<Vertex> queue = new Queue<Vertex>();
             Dictionary<Vertex, Edge> parentEdges = new Dictionary<Vertex, Edge>();
+            List<Edge> path = new List<Edge>();
 
             queue.Enqueue(startVertex);
             visited.Add(startVertex);
+
 
             while (queue.Count > 0)
             {
@@ -65,18 +118,20 @@ namespace AlgorithmOfGraphs.Algorithms
 
                         if (edge.To.Equals(endVertex))
                         {
-                            while (parentEdges.ContainsKey(currentVertex))
+
+                            while (parentEdges.ContainsKey(endVertex))
                             {
-                                path.Insert(0, parentEdges[currentVertex]);
-                                currentVertex = parentEdges[currentVertex].From;
+                                path.Add(parentEdges[endVertex]);
+                                endVertex = parentEdges[endVertex].From;
                             }
-                            return true;
+                            return path;
                         }
                     }
                 }
+
             }
 
-            return false;
+            return path;
         }
 
         private Graph InitializeGraph(Graph graph)
@@ -91,8 +146,6 @@ namespace AlgorithmOfGraphs.Algorithms
             foreach (Edge edge in graph.Edges)
             {
                 residualGraph.AddEdge(edge.From, edge.To, edge.Weight);
-                //reverse edge
-                //residualGraph.AddEdge(edge.To, edge.From, 0);
             }
 
             return residualGraph;
