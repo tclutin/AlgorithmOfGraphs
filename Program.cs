@@ -82,6 +82,14 @@ namespace AlgorithmOfGraphs
                 Console.WriteLine(item);
             }
             Console.WriteLine(max);
+
+
+            Console.WriteLine("№---");
+            List<string> steps1 = new KruskalAlgorithm().Kruskal(graph);
+            foreach (var item in steps1)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }
